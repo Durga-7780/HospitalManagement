@@ -1,0 +1,32 @@
+@charset "ISO-8859-1";
+
+
+.maindiv{
+	margin-left:25%;
+	width:50%;
+	display:flex;
+	flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.container{
+	flex: 0 1 calc(40% - 10px);
+	height:25vh;
+	box-shadow:2px 2px 4px grey;
+	padding:20px 40px;
+	position:relative;
+}
+
+.container .right{
+	position:absolute;
+	margin-left:45%;
+	font-size:18px;
+	text-decoration:none;
+	color:white;
+	font-weight:bold;
+	padding:10px 20px;
+	background-color:red;
+	border-radius:7px;
+	cursor:pointer;
+}
