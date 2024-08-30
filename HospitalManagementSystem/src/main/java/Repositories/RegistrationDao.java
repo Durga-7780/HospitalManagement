@@ -289,14 +289,22 @@ public class RegistrationDao implements CrudOperations {
 			break;
 		}
 		System.out.println("testId "+testId);
-		List<ParameterTable> parameters = getParametersByTestId(testId);
-	    Map<String, ParameterTable> parametersMap = new HashMap<>();
-	    
-	    for (ParameterTable param : parameters) {
-	        parametersMap.put(param.getLabel(), param);
-	    }
-	    System.out.println(parametersMap);
-	    return parametersMap;
+		if(t.get(0).getReportUnits()!=null)
+        {
+			List<ParameterTable> parameters = getParametersByTestId(testId);
+		    Map<String, ParameterTable> parametersMap = new HashMap<>();
+		    
+		    for (ParameterTable param : parameters) {
+		        parametersMap.put(param.getLabel(), param);
+		    }
+		    System.out.println(parametersMap);
+		    return parametersMap;
+        }
+        else {
+        	 Map<String, ParameterTable> mp = new HashMap<>();
+        	 mp.put("label",null);
+        	return mp;
+        }
 	}
 	public List<ParameterTable> getParametersByTestId(Long testId) {
 		String hql = "SELECT new ParameterTable(p.label, p.result, p.reference, p.units) " +
@@ -312,4 +320,14 @@ public class RegistrationDao implements CrudOperations {
 		System.out.println(t);
 		ses().save(t);
 	}
+	public boolean checkTestValue(String test)
+    {
+    	List<Addtest> l=ses().createQuery("FROM Addtest Where testName=: test",Addtest.class).setParameter("test", test).getResultList();
+    	for(Addtest a:l)
+    	{
+    		if(a.getTestName().equalsIgnoreCase(test))
+    			return true;
+    	}
+    	return false;	
+    }
 }

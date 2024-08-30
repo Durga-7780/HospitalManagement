@@ -44,9 +44,6 @@ public class LOGController {
 	
 	@Autowired
 	public CrudService service;
-	
-	
-	
 //  registration validation id
 	@RequestMapping(path="/check/{id}",method=RequestMethod.POST)
 	public ResponseEntity<String> check_Id(Model m,@PathVariable("id") String id)
@@ -471,14 +468,24 @@ public class LOGController {
 	         } 
 // adding new test to old json object
 	     	 
-	     	@GetMapping("/getNewTest/{test}")
+	     @GetMapping("/getNewTest/{test}")
 	     	public @ResponseBody Map<String,ParameterTable> getNewTest(@PathVariable("test") String test)
 	     	{
+	     		System.out.println("test came "+test);
+	     		test=test.replace("2", "");
 	     		System.out.println(test);
 	     		Map<String, ParameterTable> m=service.getTestJsonObjects(test);
 	     		System.out.println(m);
 	     		return m;
 	     	}
-	     
+	     	
+	     	@GetMapping("/checkTestValue/{test}")
+	     	public ResponseEntity<String> checkTestValue(@PathVariable("test") String test)
+	     	{
+	     		
+	     		if(service.checkTestValue(test))
+	     			return ResponseEntity.ok("found");
+	     		return ResponseEntity.ok("notfound");
+	     	}
 }
 

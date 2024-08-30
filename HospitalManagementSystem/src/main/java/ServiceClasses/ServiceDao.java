@@ -164,4 +164,8 @@ public class ServiceDao implements CrudService{
 	public void saveParameterTable(ParameterTable t) {
 		register.saveParameterTable(t);
 	}
+	public boolean checkTestValue(String test)
+    {
+    	return register.checkTestValue(test);	
+    }
 }

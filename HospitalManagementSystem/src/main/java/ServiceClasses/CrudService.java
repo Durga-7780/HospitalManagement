@@ -43,4 +43,6 @@ public interface CrudService {
 	Map<String, ParameterTable> getTestJsonObjects(String t);
 	void saveTest(Addtest t);
 	void saveParameterTable(ParameterTable t);
+	public boolean checkTestValue(String test);
+    
 }

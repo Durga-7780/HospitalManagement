@@ -29,7 +29,7 @@
 				    const formContainer = document.getElementById('formContainer');
 				    formContainer.innerHTML = '';
 					  
-							fetch('getNewTest/'+test,{
+							fetch('getNewTest/'+test+"2",{
 								method:'GET',
 								headers:{
 									'Content-Type':'application/json'
@@ -39,7 +39,12 @@
 									throw new Error('Response not got')
 								return res.json();
 							}).then(data=>{
-								testFields[test]=data;
+								console.log(data);
+								const keys = Object.keys(data);
+								console.log(keys.length)
+								console.log(typeof data)
+								if(keys.length>0){
+								 testFields[test]=data;
 								if (testFields[test]) {
 												        let table = `<table class="table table-bordered">
 												                        <thead>
@@ -61,7 +66,9 @@
 												        });
 												        table += `</tbody></table>`;
 												        formContainer.innerHTML = table;
-												    }else {
+												    }
+													}
+													else {
 								                formContainer.innerHTML =`<div class="form-group"><label for="reportText">Report</label><textarea class="form-control" id="reportText" rows="5"></textarea></div>`;
 								            }
 								            formContainer.innerHTML += `<div class="form-group"><label for="additionalNotes">Additional Notes</label><textarea class="form-control" id="additionalNotes" rows="3"></textarea></div>`;
