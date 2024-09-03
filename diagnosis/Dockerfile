@@ -14,7 +14,7 @@ RUN mvn clean package -DskipTests
 FROM openjdk:8-jdk-slim
 
 # Copy the built JAR file from the build stage
-COPY --from=build /app/target/diagnosis-0.0.1-SNAPSHOT.jar /app/diagnosis-0.0.1-SNAPSHOT.jar
+COPY --from=build /app/target/diagnosis-0.0.1-SNAPSHOT.jar diagnosis.jar
 
 # Set the working directory
 WORKDIR /app
@@ -23,5 +23,5 @@ WORKDIR /app
 EXPOSE 2003
 
 # Run the application
-CMD ["java", "-jar", "your-app-name.jar"]
+CMD ["java", "-jar", "diagnosis.jar"]
  
